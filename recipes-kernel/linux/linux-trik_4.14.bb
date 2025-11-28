@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/trikset/ti-linux-kernel.git;protocol=https;branch=tr
         file://fdt-location.patch \
 	    file://defconfig \
         file://display_settings.sh \
+        file://0001-fix-ass.patch \
            "
 
 S = "${WORKDIR}/git"

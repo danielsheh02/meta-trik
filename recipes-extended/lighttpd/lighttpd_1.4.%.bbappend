@@ -5,15 +5,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 #until TRIK's own scrtips moved to separate package, we need bash
 RDEPENDS:${PN} += "bash"
 
-RDEPENDS:${PN} += " \
-        lighttpd-module-alias \
-        lighttpd-module-cgi \
-        lighttpd-module-rewrite \
-        lighttpd-module-redirect \
-        lighttpd-module-proxy \
-         lighttpd-module-expire \
-"
-
 SRC_URI:append = "file://wpa-configurator.sh \
         file://wpa-writer.sh \
         file://wlan-scanner.sh \

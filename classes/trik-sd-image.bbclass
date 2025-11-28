@@ -7,7 +7,7 @@ XZ_MEMLIMIT= "6500MiB"
 XZ_COMPRESSION_LEVEL = "--verbose --no-adjust --arm --lzma2=mode=normal,dict=${XZ_DICTIONARY_SIZE}MiB,lc=1,lp=2,pb=2,mf=bt4,nice=192,depth=1024"
 EXTRA_IMAGECMD:ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
 
-inherit image_types logging user-partion
+inherit image_types user-partion
 # inherit image-mklibs
 
 DEPENDS += "u-boot-trik"

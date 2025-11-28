@@ -1,0 +1,81 @@
+From 5090969f02b2e130f752d81d9af0f56bf5ced26e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Chehade=20Daniel=20=28=D0=A8=D0=B5=D1=85=D0=B0=D0=B4=D0=B5?=
+ =?UTF-8?q?=20=D0=94=D0=B0=D0=BD=D0=B8=D1=8D=D0=BB=D1=8C=29?=
+ <71555323+danielsheh02@users.noreply.github.com>
+Date: Thu, 27 Nov 2025 18:13:55 +0300
+Subject: [PATCH] fix ass
+
+---
+ arch/arm/boot/bootp/init.S            | 2 +-
+ arch/arm/boot/compressed/big-endian.S | 2 +-
+ arch/arm/boot/compressed/head.S       | 2 +-
+ arch/arm/boot/compressed/piggy.S      | 2 +-
+ arch/arm/mm/proc-arm926.S             | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/arch/arm/boot/bootp/init.S b/arch/arm/boot/bootp/init.S
+index 78b508075161..868eeeaaa46e 100644
+--- a/arch/arm/boot/bootp/init.S
++++ b/arch/arm/boot/bootp/init.S
+@@ -16,7 +16,7 @@
+  *  size immediately following the kernel, we could build this into
+  *  a binary blob, and concatenate the zImage using the cat command.
+  */
+-		.section .start,#alloc,#execinstr
++		.section .start, "ax"
+ 		.type	_start, #function
+ 		.globl	_start
+ 
+diff --git a/arch/arm/boot/compressed/big-endian.S b/arch/arm/boot/compressed/big-endian.S
+index 88e2a88d324b..0e092c36da2f 100644
+--- a/arch/arm/boot/compressed/big-endian.S
++++ b/arch/arm/boot/compressed/big-endian.S
+@@ -6,7 +6,7 @@
+  *  Author: Nicolas Pitre
+  */
+ 
+-	.section ".start", #alloc, #execinstr
++	.section ".start", "ax"
+ 
+ 	mrc	p15, 0, r0, c1, c0, 0	@ read control reg
+ 	orr	r0, r0, #(1 << 7)	@ enable big endian mode
+diff --git a/arch/arm/boot/compressed/head.S b/arch/arm/boot/compressed/head.S
+index 5f687ba1eaa7..a1a0ac0dddee 100644
+--- a/arch/arm/boot/compressed/head.S
++++ b/arch/arm/boot/compressed/head.S
+@@ -114,7 +114,7 @@
+ #endif
+ 		.endm
+ 
+-		.section ".start", #alloc, #execinstr
++		.section ".start", "ax"
+ /*
+  * sort out different calling conventions
+  */
+diff --git a/arch/arm/boot/compressed/piggy.S b/arch/arm/boot/compressed/piggy.S
+index 0284f84dcf38..27577644ee72 100644
+--- a/arch/arm/boot/compressed/piggy.S
++++ b/arch/arm/boot/compressed/piggy.S
+@@ -1,5 +1,5 @@
+ /* SPDX-License-Identifier: GPL-2.0 */
+-	.section .piggydata,#alloc
++	.section .piggydata, "a"
+ 	.globl	input_data
+ input_data:
+ 	.incbin	"arch/arm/boot/compressed/piggy_data"
+diff --git a/arch/arm/mm/proc-arm926.S b/arch/arm/mm/proc-arm926.S
+index fb827c633693..8cf78c608c42 100644
+--- a/arch/arm/mm/proc-arm926.S
++++ b/arch/arm/mm/proc-arm926.S
+@@ -474,7 +474,7 @@ arm926_crval:
+ 
+ 	.align
+ 
+-	.section ".proc.info.init", #alloc
++	.section ".proc.info.init", "a"
+ 
+ 	.type	__arm926_proc_info,#object
+ __arm926_proc_info:
+-- 
+2.43.0
+

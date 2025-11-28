@@ -3,6 +3,8 @@ From: Franklin S. Cooper Jr <fcooper@ti.com>
 Date: Fri, 21 Sep 2012 15:18:24 -0500
 Subject: [PATCH] psplash: Add Arago custom color
 
+Upstream-Status: Inappropriate [OE specific customization]
+
 * Port custom colors used in psplash-ti from oe-classic.
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>

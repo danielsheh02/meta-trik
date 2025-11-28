@@ -17,10 +17,14 @@ DEPENDS += "rsync-native python3"
 #We need to disable sanitize_address until the issue with the high memory consumption of asan is fixed
 EXTRA_QMAKEVARS_PRE += "-r CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker \
 			CONFIG+=noPch CONFIG+=sanitize_undefined CONFIG+=sanitizer \
-			CONFIG+=trik_new_age PYTHONQTALL_CONFIG+=PythonQtCore \
-			PYTHONQTALL_CONFIG+=PythonQtGui"
-TRIK_PYTHON_VERSION = "3.10"
-EXTRA_QMAKEVARS_PRE += "PYTHON_VERSION=${TRIK_PYTHON_VERSION} PKGCONFIG+=python-${TRIK_PYTHON_VERSION}-embed"
+			CONFIG+=trik_new_age CONFIG+=trik_nopython"
+# TRIK_PYTHON_VERSION = "3.12"
+# EXTRA_QMAKEVARS_PRE += "PYTHON_VERSION=${TRIK_PYTHON_VERSION} PKGCONFIG+=python-${TRIK_PYTHON_VERSION}-embed"
+
+OE_QMAKE_CFLAGS:append = " -U_TIME_BITS -U_FILE_OFFSET_BITS -D_FILE_OFFSET_BITS=32"
+OE_QMAKE_CXXFLAGS:append = " -U_TIME_BITS -U_FILE_OFFSET_BITS -D_FILE_OFFSET_BITS=32"
+OE_QMAKE_CPPFLAGS:append = " -U_TIME_BITS -U_FILE_OFFSET_BITS -D_FILE_OFFSET_BITS=32"
+
 # For script gathering logs information
 RDEPENDS:${PN} += "bash xz"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
