@@ -51,6 +51,7 @@ RDEPENDS:${PN} = "\
   nano \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
   dbus-dev \
+  cukinia \
 "
 #  lshw
 
